@@ -1,0 +1,5 @@
+﻿  First_laba.cpp
+C:\Users\Condor\Documents\Cpp_project\Solution\First_laba\First_laba.cpp(35,26): warning C4305: аргумент: усечение из "double" в "GLclampf"
+C:\Users\Condor\Documents\Cpp_project\Solution\First_laba\First_laba.cpp(35,21): warning C4305: аргумент: усечение из "double" в "GLclampf"
+C:\Users\Condor\Documents\Cpp_project\Solution\First_laba\First_laba.cpp(35,16): warning C4305: аргумент: усечение из "double" в "GLclampf"
+  First_laba.vcxproj -> C:\Users\Condor\Documents\Cpp_project\Solution\x64\Debug\First_laba.exe
