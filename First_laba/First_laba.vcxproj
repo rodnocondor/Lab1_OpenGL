@@ -142,6 +142,9 @@
     <ClCompile Include="First_laba.cpp" />
     <ClCompile Include="glew-2.1.0\glew-2.1.0\src\glew.c" />
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="shader_loader.h" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

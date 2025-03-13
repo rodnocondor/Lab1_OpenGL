@@ -1,23 +1,34 @@
-﻿// Firstlab.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#define GLEW_DLL
+﻿#define GLEW_DLL
 #define GLFW_DLL
 
 #include "GL/glew.h"
 #include "GLFW/glfw3.h"
-#include <cstdio>
+#include <iostream>
+#include <cmath>
+#include <string>
+#include <sstream>
+#include <fstream>
+#include "shader_loader.h"
+
+GLfloat points[] =
+{
+	0, 0.5, 0.0,
+	-0.5, -0.5, 0.0,
+	0.5, -0.5, 0.0,
+};
+
+GLuint index[] = { 0, 1, 2 };
+
 
 int main()
 {
-	printf("hello world!\n");
 
 	glfwInit();
 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 1);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
-	//glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
-	//glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 6);
+	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 	GLFWwindow* window;
 
@@ -29,19 +40,43 @@ int main()
 
 	glewInit();
 
+	GLuint VAO, VBO, EBO;
+	glGenVertexArrays(1, &VAO);
+	glGenBuffers(1, &VBO);
+	glGenBuffers(1, &EBO);
+
+	glBindVertexArray(VAO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+
+	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
+
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), 0);
+	glEnableVertexAttribArray(0);
+
+	glBindBuffer(GL_ARRAY_BUFFER, 0);
+	glBindVertexArray(0);
+
+
+	GLuint shader_program = load_shader_program("assets\\shader\\vert_shader.vs", "assets\\shader\\frag_shader.fs");
+
 	while (!glfwWindowShouldClose(window))
 	{
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.2, 0.3, 0.4, 1);
+		float timeValue = glfwGetTime();
+		float Red = abs(sin(timeValue));
+		float Green = abs(sin(timeValue * 2.0f));
+		float Blue = abs(sin(timeValue * 1.5f));
 
-		glColor3f(0.5, 0.5, 0.0);
-
-		glBegin(GL_TRIANGLES);
-		glVertex2f(0, 0.5);
-		glVertex2f(-0.5, -0.5);
-		glVertex2f(0.5, -0.5);
-		glEnd();
+		glUseProgram(shader_program);
+		glBindVertexArray(VAO);
 		
+		uni4(shader_program, "ourColor", Red, Green, Blue, 1.0);
+
+		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
+
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
@@ -51,14 +86,3 @@ int main()
 	glfwTerminate();
 }
 
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.
