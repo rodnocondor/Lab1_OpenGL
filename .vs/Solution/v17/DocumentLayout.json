@@ -7,6 +7,9 @@
       "RelativeMoniker": "D:0:0:{F09CECCD-5C59-4219-9CD6-FEEB7EA14782}|First_laba\\First_laba.vcxproj|solutionrelative:First_laba\\First_laba.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Condor\\Desktop\\Zadanya.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{F09CECCD-5C59-4219-9CD6-FEEB7EA14782}|First_laba\\First_laba.vcxproj|C:\\Users\\Condor\\Documents\\Solution\\First_laba\\shader_loader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{F09CECCD-5C59-4219-9CD6-FEEB7EA14782}|First_laba\\First_laba.vcxproj|solutionrelative:First_laba\\shader_loader.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
@@ -18,11 +21,23 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Zadanya.cpp",
+              "DocumentMoniker": "C:\\Users\\Condor\\Desktop\\Zadanya.cpp",
+              "RelativeDocumentMoniker": "..\\..\\Desktop\\Zadanya.cpp",
+              "ToolTip": "C:\\Users\\Condor\\Desktop\\Zadanya.cpp",
+              "RelativeToolTip": "..\\..\\Desktop\\Zadanya.cpp",
+              "ViewState": "AgIAAHgAAAAAAAAAAAAAAB4AAAAsAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2025-04-06T15:18:13.831Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "shader_loader.h",
               "DocumentMoniker": "C:\\Users\\Condor\\Documents\\Solution\\First_laba\\shader_loader.h",
               "RelativeDocumentMoniker": "First_laba\\shader_loader.h",
@@ -40,7 +55,7 @@
               "RelativeDocumentMoniker": "First_laba\\First_laba.cpp",
               "ToolTip": "C:\\Users\\Condor\\Documents\\Solution\\First_laba\\First_laba.cpp",
               "RelativeToolTip": "First_laba\\First_laba.cpp",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACoAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAJ8AAAAAAAAAAAAAACkAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2025-02-14T19:28:31.244Z",
               "EditorCaption": ""

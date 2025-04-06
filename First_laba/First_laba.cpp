@@ -23,10 +23,12 @@ GLfloat points[] =
 GLuint index[] = { 0, 1, 2 };
 const unsigned int WIN_WIDTH = 1024;
 const unsigned int WIN_HEIGHT = 768;
+float fov = 45.0f;
+bool firstMouse = true;
 
 float	lastx = WIN_WIDTH / 2, lasty = WIN_HEIGHT / 2;
 
-GLfloat pitch = -21.0f, yaw = -97.5f;
+GLfloat pitch = 0.0f, yaw = -90.0f;
 glm::vec3 cameraPos = glm::vec3(0.0, 0.0, 5.0);
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
@@ -37,8 +39,11 @@ bool firstmouse = true;
 void scroll_callback(GLFWwindow* window, double xposIn, double yposIn)
 {
 	float ypos = static_cast<float>(yposIn);
-	float sensitivity = 0.5f; 
-	cameraPos += cameraFront * ypos * sensitivity;
+	fov -= (float)ypos;
+	if (fov < 1.0f) 
+		fov = 1.0f;
+	if (fov > 45.0f) 
+		fov = 45.0f;
 }
 
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) 
@@ -46,6 +51,14 @@ void mouse_callback(GLFWwindow* window, double xposIn, double yposIn)
 
 	float xpos = static_cast<float>(xposIn);
 	float ypos = static_cast<float>(yposIn);
+
+	if (firstMouse)
+	{
+		lastx = xpos;
+		lasty = ypos;
+		firstMouse = false;
+	}
+
 	float xoffset = xpos - lastx;
 	float yoffset = lasty - ypos;
 
@@ -154,7 +167,7 @@ int main()
 
 		glUseProgram(shader_program);
 
-		glm::mat4 projection = glm::perspective(glm::radians(45.0f), (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
+		glm::mat4 projection = glm::perspective(glm::radians(fov), (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
 
 		settingMat4(shader_program, "projection", projection);

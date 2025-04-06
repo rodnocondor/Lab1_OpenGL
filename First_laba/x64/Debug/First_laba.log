@@ -1,7 +1,1 @@
-﻿  First_laba.cpp
-C:\Users\Condor\Documents\Solution\First_laba\First_laba.cpp(81,20): warning C4305: инициализация: усечение из "double" в "float"
-C:\Users\Condor\Documents\Solution\First_laba\First_laba.cpp(148,26): warning C4305: аргумент: усечение из "double" в "GLclampf"
-C:\Users\Condor\Documents\Solution\First_laba\First_laba.cpp(148,21): warning C4305: аргумент: усечение из "double" в "GLclampf"
-C:\Users\Condor\Documents\Solution\First_laba\First_laba.cpp(148,16): warning C4305: аргумент: усечение из "double" в "GLclampf"
-C:\Users\Condor\Documents\Solution\First_laba\First_laba.cpp(149,19): warning C4244: инициализация: преобразование "double" в "float", возможна потеря данных
-  First_laba.vcxproj -> C:\Users\Condor\Documents\Solution\x64\Debug\First_laba.exe
+﻿  First_laba.vcxproj -> C:\Users\Condor\Documents\Solution\x64\Debug\First_laba.exe
