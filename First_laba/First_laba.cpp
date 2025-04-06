@@ -33,6 +33,14 @@ glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
 bool firstmouse = true;
 
 
+
+void scroll_callback(GLFWwindow* window, double xposIn, double yposIn)
+{
+	float ypos = static_cast<float>(yposIn);
+	float sensitivity = 0.5f; 
+	cameraPos += cameraFront * ypos * sensitivity;
+}
+
 void mouse_callback(GLFWwindow* window, double xposIn, double yposIn) 
 {
 
@@ -71,7 +79,7 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	float cameraSpeed = 0.005;
+	float cameraSpeed = 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
 		cameraPos += cameraSpeed * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
@@ -135,6 +143,7 @@ int main()
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwSetCursorPosCallback(window, mouse_callback);
+		glfwSetScrollCallback(window, scroll_callback);
 		processInput(window);
 		glClear(GL_COLOR_BUFFER_BIT);
 		glClearColor(0.2, 0.3, 0.4, 1);
