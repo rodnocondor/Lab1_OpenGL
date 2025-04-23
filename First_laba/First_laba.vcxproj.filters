@@ -23,8 +23,22 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="shader_loader.h">
-      <Filter>Исходные файлы</Filter>
+    <ClInclude Include="Mesh.h">
+      <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="Model.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="shader_loader.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="assets\shader\frag_shader.fs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
+    <None Include="assets\shader\vert_shader.vs">
+      <Filter>Файлы ресурсов</Filter>
+    </None>
   </ItemGroup>
 </Project>

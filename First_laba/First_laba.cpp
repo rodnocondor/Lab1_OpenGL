@@ -6,12 +6,16 @@
 #include "glm.hpp"
 #include "glm/gtc/matrix_transform.hpp"
 #include "glm/gtc/type_ptr.hpp"
+#include "Mesh.h"
+#include "Model.h"
 #include <iostream>
 #include <cmath>
 #include <string>
 #include <sstream>
 #include <fstream>
 #include "shader_loader.h"
+
+using namespace std;
 
 GLfloat points[] =
 {
@@ -106,10 +110,6 @@ void processInput(GLFWwindow* window)
 
 
 
-void settingMat4(GLuint ID, const char* name, glm::mat4 type) 
-{
-	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, &type[0][0]);
-}
 
 int main()
 {
@@ -121,6 +121,7 @@ int main()
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
+
 	GLFWwindow* window;
 
 	window = glfwCreateWindow(WIN_WIDTH, WIN_HEIGHT, "Triangle", NULL, NULL);
@@ -131,7 +132,7 @@ int main()
 
 	glewInit();
 
-	GLuint VAO, VBO, EBO;
+	/*GLuint VAO, VBO, EBO;
 	glGenVertexArrays(1, &VAO);
 	glGenBuffers(1, &VBO);
 	glGenBuffers(1, &EBO);
@@ -147,38 +148,41 @@ int main()
 	glEnableVertexAttribArray(0);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);
+	glBindVertexArray(0);*/
 
 
 	GLuint shader_program = load_shader_program("assets\\shader\\vert_shader.vs", "assets\\shader\\frag_shader.fs");
 
+	Model Arm("assets\\model\\model.obj");
+
+
+	glEnable(GL_DEPTH_TEST);
 	glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 	while (!glfwWindowShouldClose(window))
 	{
 		glfwSetCursorPosCallback(window, mouse_callback);
 		glfwSetScrollCallback(window, scroll_callback);
 		processInput(window);
-		glClear(GL_COLOR_BUFFER_BIT);
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		glClearColor(0.2, 0.3, 0.4, 1);
-		float timeValue = glfwGetTime();
-		float Red = abs(sin(timeValue));
-		float Green = abs(sin(timeValue * 2.0f));
-		float Blue = abs(sin(timeValue * 1.5f));
+		
 
 		glUseProgram(shader_program);
 
 		glm::mat4 projection = glm::perspective(glm::radians(fov), (float)WIN_WIDTH / (float)WIN_HEIGHT, 0.1f, 100.0f);
 		glm::mat4 view = glm::lookAt(cameraPos, cameraPos + cameraFront, cameraUp);
+		glm::mat4 model = glm::mat4(1.0f);
+		model = glm::translate(model, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+		model = glm::scale(model, glm::vec3(1.0f, 1.0f, 1.0f));
 
 		settingMat4(shader_program, "projection", projection);
 		settingMat4(shader_program, "view", view);
-
-		glBindVertexArray(VAO);
+		settingMat4(shader_program, "model", model);
+		//glBindVertexArray(VAO);
 		
-		uni4(shader_program, "ourColor", Red, Green, Blue, 1.0);
+		uni4(shader_program, "ourColor", 1.0f, 1.0f, 1.0f, 1.0);
 
-		glDrawElements(GL_TRIANGLES, 3, GL_UNSIGNED_INT, 0);
-
+		Arm.Draw();
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();

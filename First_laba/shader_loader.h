@@ -73,6 +73,11 @@ GLuint compileShader(string& code, GLuint shaderType)
 	return shader;
 }
 
+void settingMat4(GLuint ID, const char* name, glm::mat4 type)
+{
+	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, &type[0][0]);
+}
+
 GLuint load_shader_program(const string& vertexShaderPath, const string& fragmentShaderPath)
 {
 	string vertexCode = load_data_from_file(vertexShaderPath);
