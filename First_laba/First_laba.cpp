@@ -132,24 +132,6 @@ int main()
 
 	glewInit();
 
-	/*GLuint VAO, VBO, EBO;
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
-	glGenBuffers(1, &EBO);
-
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
-
-	glBufferData(GL_ARRAY_BUFFER, sizeof(points), points, GL_STATIC_DRAW);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(index), index, GL_STATIC_DRAW);
-
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(GL_FLOAT), 0);
-	glEnableVertexAttribArray(0);
-
-	glBindBuffer(GL_ARRAY_BUFFER, 0);
-	glBindVertexArray(0);*/
-
 
 	GLuint shader_program = load_shader_program("assets\\shader\\vert_shader.vs", "assets\\shader\\frag_shader.fs");
 
@@ -178,7 +160,6 @@ int main()
 		settingMat4(shader_program, "projection", projection);
 		settingMat4(shader_program, "view", view);
 		settingMat4(shader_program, "model", model);
-		//glBindVertexArray(VAO);
 		
 		uni4(shader_program, "ourColor", 1.0f, 1.0f, 1.0f, 1.0);
 
