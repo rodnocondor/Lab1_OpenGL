@@ -143,13 +143,14 @@
     <ClCompile Include="glew-2.1.0\glew-2.1.0\src\glew.c" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="funcs.h" />
     <ClInclude Include="Mesh.h" />
     <ClInclude Include="Model.h" />
     <ClInclude Include="shader_loader.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shader\frag_shader.fs" />
-    <None Include="assets\shader\vert_shader.vs" />
+    <None Include="assets\shader\frag_shader.glsl" />
+    <None Include="assets\shader\vert_shader.glsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

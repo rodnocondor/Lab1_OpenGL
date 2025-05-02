@@ -1,7 +1,6 @@
-#ifndef SHADER_LOADER_H
-#define SHADER_LOADER_H
-
+#pragma once
 using namespace std;
+
 
 string load_data_from_file(const string& path)
 {
@@ -9,7 +8,7 @@ string load_data_from_file(const string& path)
 
 	string fileText = "";
 	string temp = "";
-	while (getline(inFile, temp)) 
+	while (getline(inFile, temp))
 	{
 		fileText += temp + "\n";
 	}
@@ -17,10 +16,7 @@ string load_data_from_file(const string& path)
 	return fileText;
 }
 
-void uni4(GLuint program, const string& nameColor, float red, float green, float blue, float alpha)
-{
-	glUniform4f(glGetUniformLocation(program, "ourColor"), red, green, blue, alpha);
-}
+
 
 void checkCompileErrors(GLuint shader, const string& type)
 {
@@ -73,10 +69,7 @@ GLuint compileShader(string& code, GLuint shaderType)
 	return shader;
 }
 
-void settingMat4(GLuint ID, const char* name, glm::mat4 type)
-{
-	glUniformMatrix4fv(glGetUniformLocation(ID, name), 1, GL_FALSE, &type[0][0]);
-}
+
 
 GLuint load_shader_program(const string& vertexShaderPath, const string& fragmentShaderPath)
 {
@@ -95,4 +88,3 @@ GLuint load_shader_program(const string& vertexShaderPath, const string& fragmen
 
 	return shader_program;
 }
-#endif

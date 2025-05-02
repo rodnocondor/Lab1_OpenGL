@@ -32,12 +32,15 @@
     <ClInclude Include="shader_loader.h">
       <Filter>Файлы заголовков</Filter>
     </ClInclude>
+    <ClInclude Include="funcs.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\shader\frag_shader.fs">
+    <None Include="assets\shader\frag_shader.glsl">
       <Filter>Файлы ресурсов</Filter>
     </None>
-    <None Include="assets\shader\vert_shader.vs">
+    <None Include="assets\shader\vert_shader.glsl">
       <Filter>Файлы ресурсов</Filter>
     </None>
   </ItemGroup>
