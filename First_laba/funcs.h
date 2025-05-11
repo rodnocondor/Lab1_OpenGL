@@ -22,6 +22,12 @@ GLfloat pitch = 0.0f, yaw = -90.0f;
 glm::vec3 cameraPos = glm::vec3(0.0, 0.0, 5.0);
 glm::vec3 cameraFront = glm::vec3(0.0, 0.0, -1.0);
 glm::vec3 cameraUp = glm::vec3(0.0, 1.0, 0.0);
+glm::mat4 rotateOX1 = glm::mat4(1.0f);
+glm::mat4 rotateOX2 = glm::mat4(1.0f);
+glm::mat4 rotateOX3 = glm::mat4(1.0f);
+float angleOX1 = 0.0f;
+float angleOX2 = 0.0f;
+float angleOX3 = 0.0f;
 bool firstmouse = true;
 
 void uni4(GLuint program, const string& nameColor, float red, float green, float blue, float alpha)
@@ -61,8 +67,8 @@ void settingAllMatrix(GLuint shader_program)
 	glm::mat4 modelMatrix = glm::mat4(1.0f);
 
 	// матрицы
-	glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(modelMatrix)));
-	settingMat3(shader_program, "normalMatrix", normalMatrix);
+	/*glm::mat3 normalMatrix = glm::transpose(glm::inverse(glm::mat3(modelMatrix)));
+	settingMat3(shader_program, "normalMatrix", normalMatrix);*/
 
 	//  свет
 	glm::vec3 lightColor = glm::vec3(1.0f, 1.0f, 1.0f);
@@ -151,14 +157,71 @@ void processInput(GLFWwindow* window)
 	if (glfwGetKey(window, GLFW_KEY_ESCAPE) == GLFW_PRESS)
 		glfwSetWindowShouldClose(window, true);
 
-	float cameraSpeed = 0.005f;
+	float deltaTime = 0.005f;
 	if (glfwGetKey(window, GLFW_KEY_W) == GLFW_PRESS)
-		cameraPos += cameraSpeed * cameraFront;
+		cameraPos += deltaTime * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_S) == GLFW_PRESS)
-		cameraPos -= cameraSpeed * cameraFront;
+		cameraPos -= deltaTime * cameraFront;
 	if (glfwGetKey(window, GLFW_KEY_A) == GLFW_PRESS)
-		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		cameraPos -= glm::normalize(glm::cross(cameraFront, cameraUp)) * deltaTime;
 	if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
-		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * cameraSpeed;
+		cameraPos += glm::normalize(glm::cross(cameraFront, cameraUp)) * deltaTime;
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_1) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_N) == GLFW_PRESS))
+	{
+		if (angleOX1 > -160) {
+			float newAngle = angleOX1 - deltaTime * 10;
+			rotateOX1 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+			angleOX1 = newAngle;
+		}
+	}
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_2) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_M) == GLFW_PRESS))
+	{
+		if (angleOX1 < 160) {
+			float newAngle = angleOX1 + deltaTime * 10;
+			rotateOX1 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(0.0f, 1.0f, 0.0f));
+			angleOX1 = newAngle;
+		}
+	}
+
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_4) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_J) == GLFW_PRESS))
+	{
+		if (angleOX2 > -60) {
+			float newAngle = angleOX2 - deltaTime * 10;
+			rotateOX2 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(1.0f, 0.0f, 0.0f));
+			angleOX2 = newAngle;
+		}
+	}
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_5) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_K) == GLFW_PRESS))
+	{
+		if (angleOX2 < 120) {
+			float newAngle = angleOX2 + deltaTime * 10;
+			rotateOX2 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(1.0f, 0.0f, 0.0f));
+			angleOX2 = newAngle;
+		}
+	}
+
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_7) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_I) == GLFW_PRESS))
+	{
+		if (angleOX3 > -75) {
+			float newAngle = angleOX3 - deltaTime * 10;
+			rotateOX3 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(1.0f, 0.0f, 0.0f));
+			angleOX3 = newAngle;
+		}
+	}
+
+	if ((glfwGetKey(window, GLFW_KEY_KP_8) == GLFW_PRESS) || (glfwGetKey(window, GLFW_KEY_O) == GLFW_PRESS))
+	{
+		if (angleOX3 < 90) {
+			float newAngle = angleOX3 + deltaTime * 10;
+			rotateOX3 = glm::rotate(glm::mat4(1.0f), glm::radians(newAngle), glm::vec3(1.0f, 0.0f, 0.0f));
+			angleOX3 = newAngle;
+		}
+	}
+		
 }
 

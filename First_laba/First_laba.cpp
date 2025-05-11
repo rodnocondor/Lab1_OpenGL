@@ -62,7 +62,7 @@ int main()
 		settingAllMatrix(shader_program);
 
 
-		Arm.Draw();
+		Arm.Draw(shader_program, rotateOX1, rotateOX2, rotateOX3);
 
 		glfwSwapBuffers(window);
 		glfwPollEvents();
